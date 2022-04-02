@@ -1,16 +1,21 @@
 <script>
 	export let name;
+	import Navbar from "./components/Navbar.svelte";
 </script>
 
+<Navbar />
 <main>
-	<h1>Hello {name}!</h1>
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
+	<h1>We are Team {name}!</h1>
+	<p>
+		Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn
+		how to build Svelte apps.
+	</p>
 </main>
 
 <style>
 	main {
 		text-align: center;
-		padding: 1em;
+		padding: 0;
 		max-width: 240px;
 		margin: 0 auto;
 	}
