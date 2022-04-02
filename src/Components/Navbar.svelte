@@ -1,5 +1,9 @@
 <header>
-	<div class="img-div" />
+	<div class="img-div">
+		<img
+			src="https://upload.wikimedia.org/wikipedia/en/3/3b/Canva_Logo.png"
+		/>
+	</div>
 	<div class="link-div">
 		<div class="link hover-underline-animation">How to Use</div>
 		<div class="link hover-underline-animation">Contribute</div>
@@ -9,26 +13,32 @@
 
 <style>
 	header {
-		padding: 1rem;
+		padding: 1rem 4rem;
 		height: 10vh;
 		background-color: transparent;
 		display: flex;
+  justify-content:space-between;
 	}
 	.img-div {
-		flex: 1;
-		border: 1px solid green;
+		height: 100%;
+  width:20%;
+	}
+
+	.img-div img {
+		width: auto;
+		height: 100%;
 	}
 	.link-div {
-		flex: 2;
+		width:30%;
 		/* border: 2px solid red; */
 		display: flex;
 		align-items: center;
-		justify-content: space-evenly;
+		justify-content: space-between;
 	}
 	.link {
 		text-decoration: none;
 		color: #fff;
-		font-size: 2rem;
+		font-size: 1.5rem;
 		font-weight: 600;
 		cursor: pointer;
 		text-align: center;
@@ -54,5 +64,20 @@
 	.hover-underline-animation:hover:after {
 		transform: scaleX(1);
 		transform-origin: bottom left;
+	}
+
+	@media only screen and (max-width: 768px) {
+		.link {
+			font-size: 2rem;
+		}
+  header{
+   padding:1rem;
+  }
+  .img-div{
+   width:30%;
+  }
+		.link-div {
+			width:60%;
+		}
 	}
 </style>
