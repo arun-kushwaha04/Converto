@@ -1,7 +1,7 @@
 <header>
 	<div class="img-div">
 		<img
-			src="https://upload.wikimedia.org/wikipedia/en/3/3b/Canva_Logo.png"
+			src="https://upload.wikimedia.org/wikipedia/en/3/3b/Canva_Logo.png" alt=""
 		/>
 	</div>
 	<div class="link-div">
