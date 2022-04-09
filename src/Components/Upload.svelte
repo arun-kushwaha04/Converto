@@ -1,6 +1,7 @@
 <script>
 	import { onMount } from "svelte";
 	let dragdrop;
+	let maxAllowedSize = 5 * 1024 * 1024;
 	onMount(() => {
 		dragdrop = document.querySelector(".dragdrop");
 		dragdrop.addEventListener("dragover", (e) => {
@@ -14,22 +15,35 @@
 
 		dragdrop.addEventListener("drop", (e) => {
 			e.preventDefault();
+
+			const image = e.dataTransfer.files[0];
+			const type = image.type;
+
+			if (image.size < maxAllowedSize) {
+				if (
+					type == "image/png" ||
+					type == "image/jpg" ||
+					type == "image/jpeg"
+				) {
+					upload(image);
+				} else {
+					console.log("Invalid file format");
+					dragdrop.setAttribute("class", "droparea invalid");
+					dragdrop.innerText = "Invalid File Format!";
+				}
+				uploadFile();
+			} else {
+				console.log("Max Size Limit exceeded");
+				//showToast("Max file size is 100MB");
+			}
 		});
 
-		const image = e.dataTransfer.files[0];
-		const type = image.type;
+		let browseBtn = document.querySelector(".selectFile");
+		let fileInput = document.querySelector("#fileInput");
 
-		if (
-			type == "image/png" ||
-			type == "image/jpg" ||
-			type == "image/jpeg"
-		) {
-			return upload(image);
-		} else {
-			dragdrop.setAttribute("class", "droparea invalid");
-			dragdrop.innerText = "Invalid File Format!";
-			return false;
-		}
+		browseBtn.addEventListener("click", () => {
+			fileInput.click();
+		});
 	});
 
 	const upload = (image) => {
@@ -41,8 +55,10 @@
 <div class="fileupload">
 	<div class="dragdrop">
 		<p style="font-size: 2.5em; color: #D2D2D2">
-			Drag and Drop the image to convert
+			Drag Your Image Here, or <span class="selectFile">Browse</span>
 		</p>
+		<input type="file" id="fileInput" accept="image/*" />
+
 		<img src="" alt="" />
 		<!-- add image -->
 	</div>
@@ -87,6 +103,15 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
+		cursor: pointer;
+	}
+
+	#fileInput {
+		display: none;
+	}
+
+	.selectFile {
+		color: steelblue;
 	}
 
 	.uploadBtns {
