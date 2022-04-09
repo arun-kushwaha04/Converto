@@ -16,20 +16,20 @@
 			e.preventDefault();
 		});
 
-		const image = e.dataTransfer.files[0];
-		const type = image.type;
+		// const image = e.dataTransfer.files[0];
+		// const type = image.type;
 
-		if (
-			type == "image/png" ||
-			type == "image/jpg" ||
-			type == "image/jpeg"
-		) {
-			return upload(image);
-		} else {
-			dragdrop.setAttribute("class", "droparea invalid");
-			dragdrop.innerText = "Invalid File Format!";
-			return false;
-		}
+		// if (
+		// 	type == "image/png" ||
+		// 	type == "image/jpg" ||
+		// 	type == "image/jpeg"
+		// ) {
+		// 	return upload(image);
+		// } else {
+		// 	dragdrop.setAttribute("class", "droparea invalid");
+		// 	dragdrop.innerText = "Invalid File Format!";
+		// 	return false;
+		// }
 	});
 
 	const upload = (image) => {
