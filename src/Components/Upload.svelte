@@ -1,53 +1,69 @@
-<!-- <script>
-    const dragdrop = document.querySelector(".dragdrop");
+<script>
+	import { onMount } from "svelte";
+	let dragdrop;
+	onMount(() => {
+		dragdrop = document.querySelector(".dragdrop");
+		dragdrop.addEventListener("dragover", (e) => {
+			e.preventDefault();
+			dragdrop.classList.add("hover");
+		});
 
-    dragdrop.addEventListener("dragover", (e) => {
-    e.preventDefault();
-    dragdrop.classList.add("hover");
-    });
+		dragdrop.addEventListener("dragleave", () => {
+			dragdrop.classList.remove("hover");
+		});
 
-    dragdrop.addEventListener("dragleave", () => {
-    dragdrop.classList.remove("hover");
-    });
+		dragdrop.addEventListener("drop", (e) => {
+			e.preventDefault();
+		});
 
-    dragdrop.addEventListener("drop", (e) => {
-    e.preventDefault();
+		const image = e.dataTransfer.files[0];
+		const type = image.type;
 
-    const image = e.dataTransfer.files[0];
-    const type = image.type;
+		if (
+			type == "image/png" ||
+			type == "image/jpg" ||
+			type == "image/jpeg"
+		) {
+			return upload(image);
+		} else {
+			dragdrop.setAttribute("class", "droparea invalid");
+			dragdrop.innerText = "Invalid File Format!";
+			return false;
+		}
+	});
 
-    if (type == "image/png" || type == "image/jpg" || type == "image/jpeg") {
-        return upload(image);
-    } else {
-        dragdrop.setAttribute("class", "droparea invalid");
-        dragdrop.innerText = "Invalid File Format!";
-        return false;
-    }
-    });
-
-    const upload = (image) => {
-    dragdrop.setAttribute("class", "droparea valid");
-    dragdrop.innerText = "Added " + image.name;
-    };
-</script> -->
+	const upload = (image) => {
+		dragdrop.setAttribute("class", "droparea valid");
+		dragdrop.innerText = "Added " + image.name;
+	};
+</script>
 
 <div class="fileupload">
-    <div class="dragdrop">
-        <p style="font-size: 2.5em; color: #D2D2D2">Drag and Drop the image to convert</p>
-        <img src="" alt=""> <!-- add image -->
-    </div>
-    <div class="uploadBtns">
-        <button id="upload" class="btn"><img src="/images/Vector.png" alt=""></button>
-        <button id="link" class="btn"><img src="/images/link2.png" alt=""></button>
-        <button id="camera" class="btn" ><img src="/images/camera2.png" alt=""></button>
-    </div>
-    <div class="convertBtn">
-        <button id="convert">Convert</button>
-    </div>
+	<div class="dragdrop">
+		<p style="font-size: 2.5em; color: #D2D2D2">
+			Drag and Drop the image to convert
+		</p>
+		<img src="" alt="" />
+		<!-- add image -->
+	</div>
+	<div class="uploadBtns">
+		<button id="upload" class="btn"
+			><img src="/images/Vector.png" alt="" /></button
+		>
+		<button id="link" class="btn"
+			><img src="/images/link2.png" alt="" /></button
+		>
+		<button id="camera" class="btn"
+			><img src="/images/camera2.png" alt="" /></button
+		>
+	</div>
+	<div class="convertBtn">
+		<button id="convert">Convert</button>
+	</div>
 </div>
 
 <style>
-    .fileupload {
+	.fileupload {
 		position: absolute;
 		right: 4em;
 		top: 20%;
@@ -73,30 +89,30 @@
 		align-items: center;
 	}
 
-	.uploadBtns{
+	.uploadBtns {
 		/* margin: 20px; */
 		width: 100%;
 	}
-	.btn{
+	.btn {
 		background-color: transparent;
 		border: none;
 		cursor: pointer;
 		margin: 0px 20px 0px 20px;
 	}
-	.btn:active{
+	.btn:active {
 		background-color: transparent;
 	}
-	.convertBtn{
+	.convertBtn {
 		display: flex;
 		justify-content: center;
 		width: 100%;
 	}
-	#convert{
+	#convert {
 		display: flex;
-    	align-items: center;
-    	justify-content: center;
+		align-items: center;
+		justify-content: center;
 		width: 90%;
-		background-color: #FF3E00;
+		background-color: #ff3e00;
 		border: none;
 		color: #fff;
 		border-radius: 10px;
@@ -106,7 +122,7 @@
 		margin: 10px;
 		cursor: pointer;
 	}
-	.btn img{
+	.btn img {
 		width: 40px;
 	}
 </style>
