@@ -27,14 +27,14 @@
 			],
 		};
 		document.querySelector("#convert").innerHTML = "Converting ...";
-		let API_KEY = "23eryAIzaSyDP82kHStfg7L57MnTBZscQmkK63ZKvgT8werie";
-		let temp = "";
-		for (let index = 0; index < API_KEY.length; index++) {
-			if (index > 4 && index < API_KEY.length - 5) {
-				temp += API_KEY[index];
-			}
-		}
-		API_KEY = temp;
+		let API_KEY = "";
+		// let temp = "";
+		// for (let index = 0; index < API_KEY.length; index++) {
+		// 	if (index > 4 && index < API_KEY.length - 5) {
+		// 		temp += API_KEY[index];
+		// 	}
+		// }
+		// API_KEY = temp;
 		let NEW_ENDPOINT_URL = ENDPOINT_URL + `?key=${API_KEY}`;
 		jsonBody = JSON.stringify(jsonBody);
 		const res = await fetch(NEW_ENDPOINT_URL, {
