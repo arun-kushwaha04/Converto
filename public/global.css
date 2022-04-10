@@ -1,100 +1,87 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 * {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-	font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
 }
 
 html,
 body {
-	position: relative;
-	width: 100%;
-	height: 100%;
-	font-size: 10px;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    font-size: 10px;
 }
 
 body {
-	background: linear-gradient(
-		242.97deg,
-		#221d49 5.47%,
-		#16132f 17.25%,
-		#0d0b1d 27.9%,
-		#06050e 38.19%,
-		#000000 49.01%,
-		#040309 60.74%,
-		#0b0917 70.09%,
-		#120f27 82.02%,
-		#221d49 92.69%
-	);
-	margin: 0;
-	padding: 8px;
-	box-sizing: border-box;
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-		Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    background: linear-gradient( 242.97deg, #221d49 5.47%, #16132f 17.25%, #0d0b1d 27.9%, #06050e 38.19%, #000000 49.01%, #040309 60.74%, #0b0917 70.09%, #120f27 82.02%, #221d49 92.69%);
+    margin: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 }
 
 a {
-	color: rgb(0, 100, 200);
-	text-decoration: none;
+    color: rgb(0, 100, 200);
+    text-decoration: none;
 }
 
 a:hover {
-	text-decoration: underline;
+    text-decoration: underline;
 }
 
 a:visited {
-	color: rgb(0, 80, 160);
+    color: rgb(0, 80, 160);
 }
 
 label {
-	display: block;
+    display: block;
 }
 
 input,
 button,
 select,
 textarea {
-	font-family: inherit;
-	font-size: inherit;
-	-webkit-padding: 0.4em 0;
-	padding: 0.4em;
-	margin: 0 0 0.5em 0;
-	box-sizing: border-box;
-	border: 1px solid #ccc;
-	border-radius: 2px;
+    font-family: inherit;
+    font-size: inherit;
+    -webkit-padding: 0.4em 0;
+    padding: 0.4em;
+    margin: 0 0 0.5em 0;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 2px;
 }
 
 input:disabled {
-	color: #ccc;
+    color: #ccc;
 }
 
 button {
-	color: #333;
-	background-color: #f4f4f4;
-	outline: none;
+    color: #333;
+    background-color: #f4f4f4;
+    outline: none;
 }
 
 button:disabled {
-	color: #999;
+    color: #999;
 }
 
 button:not(:disabled):active {
-	background-color: #ddd;
+    background-color: #ddd;
 }
 
 button:focus {
-	border-color: #666;
+    border-color: #666;
 }
 
 @media only screen and (max-width: 768px) {
-	html {
-		font-size: 8px;
-	}
+    html {
+        font-size: 8px;
+    }
 }
 
 @media only screen and (max-width: 600px) {
-	html {
-		font-size: 7px;
-	}
+    html {
+        font-size: 7px;
+    }
 }

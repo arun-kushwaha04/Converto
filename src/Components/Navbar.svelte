@@ -6,7 +6,7 @@
 		/>
 	</div>
 	<div class="link-div">
-		<div class="link hover-underline-animation">How to Use</div>
+		<div class="link hover-underline-animation how-to-use">How to Use</div>
 		<div class="link hover-underline-animation">
 			<a href="https://github.com/anshrusia200/Converto" target="_blank"
 				>Contribute</a

@@ -2,13 +2,49 @@
 	import { onMount } from "svelte";
 	let dragdrop;
 	let base64String;
-	let isImageConverted = true;
+	let isImageConverted = false;
 	let maxAllowedSize = 20 * 1024 * 1024;
 	let uploadStatus;
 	let imageTypes = ["image/png", "image/bmp", "image/jpeg"];
 
-	let convertedText =
-		"Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore cupiditate debitis, at similique ex repudiandae quas facilis, nulla quo soluta voluptates dolorum accusamus dicta? Perspiciatis officiis, reprehenderit dolorem sequi eligendi alias iusto velit quo ullam blanditiis ab fuga labore magnam. Magni non consequuntur adipisci, id assumenda dolorem sint aliquam obcaecati ipsum modi quam, cupiditate eos pariatur expedita. Sint temporibus, expedita possimus obcaecati vitae cum labore minus unde totam tenetur quos eveniet architecto reprehenderit iure iste exercitationem reiciendis incidunt repellat omnis modi delectus neque amet. Ullam impedit alias, labore doloribus corrupti facilis saepe earum amet? Facere nostrum ab voluptatum dicta dolor sunt, at quo laboriosam velit quis, optio, rerum recusandae magni repellendus. Assumenda quod, nulla veritatis voluptatum distinctio animi similique aspernatur deserunt, adipisci id iure perferendis ipsum ut soluta. Ullam repellendus voluptatem quod maxime minus? Laborum amet id maiores accusantium sapiente necessitatibus tempora rerum cupiditate, exercitationem nobis minus sequi quas laboriosam autem doloremque, non facilis repellat eligendi et. Iusto ipsam molestiae non sint, aut porro, perspiciatis modi iste beatae, velit neque perferendis! Soluta odio distinctio nesciunt unde fugit, cum eaque! Vero assumenda itaque perferendis deleniti exercitationem, distinctio quibusdam laudantium quo aliquid natus modi ipsum repudiandae consequuntur temporibus. Est nemo qui consequatur.";
+	let ENDPOINT_URL = `https://vision.googleapis.com/v1/images:annotate`;
+
+	let convertedText = "";
+
+	const getResultFromModel = async () => {
+		let jsonBody = {
+			requests: [
+				{
+					image: {
+						content: base64String,
+					},
+					features: [
+						{
+							type: "DOCUMENT_TEXT_DETECTION",
+						},
+					],
+				},
+			],
+		};
+		let API_KEY = "AIzaSyDP82kHStfg7L57MnTBZscQmkK63ZKvgT8";
+		let NEW_ENDPOINT_URL = ENDPOINT_URL + `?key=${API_KEY}`;
+		console.log(NEW_ENDPOINT_URL);
+		jsonBody = JSON.stringify(jsonBody);
+		// const res = await fetch(NEW_ENDPOINT_URL, {
+		// 	method: "POST",
+		// 	body: jsonBody,
+		// 	headers: {
+		// 		"Content-Type": "application/json",
+		// 	},
+		// });
+		// const data = await res.json();
+		// convertedText = data.responses[0].fullTextAnnotation.text;
+		document.querySelector("#convert").innerHTML = "Converting ...";
+		console.log(convertedText);
+		document.querySelector("#convert").innerHTML = "Convert";
+		isImageConverted = true;
+	};
+
 	onMount(() => {
 		dragdrop = document.querySelector(".dragdrop");
 		dragdrop.addEventListener("dragover", (e) => {
@@ -78,6 +114,7 @@
 		convertedText = undefined;
 		uploadStatus = undefined;
 		isImageConverted = false;
+		location.reload();
 	};
 
 	const upload = (image) => {
@@ -92,7 +129,6 @@
 				.replace(/^.+,/, "");
 
 			// alert(imageBase64Stringsep);
-			console.log(base64String);
 		};
 		reader.readAsDataURL(image);
 	};
@@ -103,7 +139,7 @@
 		<h1 class="bantext">ONLINE OCR</h1>
 		<h2 class="bantext2">Extract text from images easily and accurately</h2>
 	</div>
-	{#if isImageConverted == true}
+	{#if isImageConverted === true}
 		<div class="convert-text-wrapper">
 			<div class="converted-text-div">
 				<h1 class="converted-message">
@@ -159,7 +195,9 @@
 						? "convertBtn"
 						: "nodisplay"}
 				>
-					<button id="convert">Convert</button>
+					<button id="convert" on:click={getResultFromModel}
+						>Convert</button
+					>
 				</div>
 			</div>
 		</div>
