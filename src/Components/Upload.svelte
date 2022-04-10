@@ -1,7 +1,9 @@
 <script>
 	import { onMount } from "svelte";
 	let dragdrop;
-	let maxAllowedSize = 5 * 1024 * 1024;
+	let base64String;
+	let maxAllowedSize = 20 * 1024 * 1024;
+	let uploadStatus;
 	onMount(() => {
 		dragdrop = document.querySelector(".dragdrop");
 		dragdrop.addEventListener("dragover", (e) => {
@@ -19,19 +21,19 @@
 			const image = e.dataTransfer.files[0];
 			const type = image.type;
 
-			if (image.size < maxAllowedSize) {
+			if (image.size <= maxAllowedSize) {
 				if (
-					type == "image/png" ||
 					type == "image/jpg" ||
-					type == "image/jpeg"
+					type == "iimage/png" ||
+					type == "mage/jpeg"
 				) {
 					upload(image);
 				} else {
 					console.log("Invalid file format");
-					dragdrop.setAttribute("class", "droparea invalid");
-					dragdrop.innerText = "Invalid File Format!";
+					// dragdrop.classList.add("uploadFailed");
+					uploadStatus = "failed";
+					dragdrop.children[0].innerText = "Invalid File Format!";
 				}
-				uploadFile();
 			} else {
 				console.log("Max Size Limit exceeded");
 				//showToast("Max file size is 100MB");
@@ -42,18 +44,52 @@
 		let fileInput = document.querySelector("#fileInput");
 
 		browseBtn.addEventListener("click", () => {
+			console.log("Browse Button Clicked");
 			fileInput.click();
+		});
+
+		fileInput.addEventListener("change", (e) => {
+			e.preventDefault();
+
+			const image = fileInput.files[0];
+			console.log(image);
+
+			if (image.size <= maxAllowedSize) {
+				upload(image);
+			} else {
+				console.log(maxAllowedSize - image.size);
+				console.log("Max Size Limit exceeded");
+				//showToast("Max file size is 100MB");
+			}
 		});
 	});
 
 	const upload = (image) => {
-		dragdrop.setAttribute("class", "droparea valid");
-		dragdrop.innerText = "Added " + image.name;
+		uploadStatus = "success";
+		dragdrop.children[0].innerText = "Selected " + image.name;
+		var reader = new FileReader();
+		console.log("next");
+
+		reader.onload = function () {
+			base64String = reader.result
+				.replace("data:", "")
+				.replace(/^.+,/, "");
+
+			// alert(imageBase64Stringsep);
+			console.log(base64String);
+		};
+		reader.readAsDataURL(image);
 	};
 </script>
 
 <div class="fileupload">
-	<div class="dragdrop">
+	<div
+		class={!uploadStatus
+			? "dragdrop"
+			: uploadStatus === "success"
+			? "dragdrop uploadSuccess"
+			: "dragdrop uploadFailed"}
+	>
 		<p style="font-size: 2.5em; color: #D2D2D2">
 			Drag Your Image Here, or <span class="selectFile">Browse</span>
 		</p>
@@ -104,6 +140,22 @@
 		justify-content: center;
 		align-items: center;
 		cursor: pointer;
+	}
+
+	.uploadSuccess {
+		border: 2px dashed green !important;
+	}
+
+	.uploadSuccess p {
+		color: green !important;
+	}
+
+	.uploadFailed {
+		border: 2px dashed red !important;
+	}
+
+	.uploadFailed p {
+		color: red !important;
 	}
 
 	#fileInput {
