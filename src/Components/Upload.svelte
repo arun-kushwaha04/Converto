@@ -66,6 +66,20 @@
 		});
 	});
 
+	const copyConvertedText = () => {
+		navigator.clipboard.writeText(convertedText);
+		document.querySelector("#copy").innerText = "Text Copied ✔️";
+		setTimeout(() => {
+			document.querySelector("#copy").innerText = "Copy";
+		}, 2000);
+	};
+
+	const reset = () => {
+		convertedText = undefined;
+		uploadStatus = undefined;
+		isImageConverted = false;
+	};
+
 	const upload = (image) => {
 		uploadStatus = "success";
 		dragdrop.children[0].innerText = "Selected " + image.name;
@@ -99,11 +113,15 @@
 					<p class="converted-text">{convertedText}</p>
 				</div>
 				<div class="coverted-options">
-					<button class="button-converted" id="copy"
-						>Copy To Clipboard</button
+					<button
+						class="button-converted"
+						id="copy"
+						on:click={copyConvertedText}>Copy To Clipboard</button
 					>
-					<button class="button-converted" id="reload"
-						>Convert Again</button
+					<button
+						class="button-converted"
+						id="reload"
+						on:click={reset}>Convert Again</button
 					>
 				</div>
 			</div>
