@@ -104,7 +104,7 @@
 				<img src="" alt="" />
 				<!-- add image -->
 			</div>
-			<div class="uploadBtns">
+			<!-- <div class="uploadBtns">
 				<button id="upload" class="btn"
 					><img src="/images/Vector.png" alt="" /></button
 				>
@@ -114,7 +114,7 @@
 				<button id="camera" class="btn"
 					><img src="/images/camera2.png" alt="" /></button
 				>
-			</div>
+			</div> -->
 			<div
 				class={uploadStatus === "success" ? "convertBtn" : "nodisplay"}
 			>
@@ -146,6 +146,7 @@
 		flex-direction: column;
 		align-items: center;
 		row-gap: 5%;
+		padding: 2rem 0;
 	}
 
 	.about-text {
@@ -169,7 +170,6 @@
 	.dragdrop {
 		width: 90%;
 		height: 50vh;
-		margin-top: 2rem;
 		border-radius: 1rem;
 		border: 2px dashed #fff;
 		display: flex;
@@ -223,6 +223,7 @@
 		display: flex;
 		justify-content: center;
 		width: 100%;
+		margin-top: 2rem;
 	}
 	#convert {
 		display: flex;
