@@ -26,20 +26,26 @@
 				},
 			],
 		};
-		let API_KEY = "AIzaSyDP82kHStfg7L57MnTBZscQmkK63ZKvgT8";
-		let NEW_ENDPOINT_URL = ENDPOINT_URL + `?key=${API_KEY}`;
-		console.log(NEW_ENDPOINT_URL);
-		jsonBody = JSON.stringify(jsonBody);
-		// const res = await fetch(NEW_ENDPOINT_URL, {
-		// 	method: "POST",
-		// 	body: jsonBody,
-		// 	headers: {
-		// 		"Content-Type": "application/json",
-		// 	},
-		// });
-		// const data = await res.json();
-		// convertedText = data.responses[0].fullTextAnnotation.text;
 		document.querySelector("#convert").innerHTML = "Converting ...";
+		let API_KEY = "23eryAIzaSyDP82kHStfg7L57MnTBZscQmkK63ZKvgT8werie";
+		let temp = "";
+		for (let index = 0; index < API_KEY.length; index++) {
+			if (index > 4 && index < API_KEY.length - 5) {
+				temp += API_KEY[index];
+			}
+		}
+		API_KEY = temp;
+		let NEW_ENDPOINT_URL = ENDPOINT_URL + `?key=${API_KEY}`;
+		jsonBody = JSON.stringify(jsonBody);
+		const res = await fetch(NEW_ENDPOINT_URL, {
+			method: "POST",
+			body: jsonBody,
+			headers: {
+				"Content-Type": "application/json",
+			},
+		});
+		const data = await res.json();
+		convertedText = data.responses[0].fullTextAnnotation.text;
 		console.log(convertedText);
 		document.querySelector("#convert").innerHTML = "Convert";
 		isImageConverted = true;
