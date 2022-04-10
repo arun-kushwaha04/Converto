@@ -2,9 +2,13 @@
 	import { onMount } from "svelte";
 	let dragdrop;
 	let base64String;
+	let isImageConverted = true;
 	let maxAllowedSize = 20 * 1024 * 1024;
 	let uploadStatus;
-	var imageTypes = ["image/png", "image/bmp", "image/jpeg"];
+	let imageTypes = ["image/png", "image/bmp", "image/jpeg"];
+
+	let convertedText =
+		"Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore cupiditate debitis, at similique ex repudiandae quas facilis, nulla quo soluta voluptates dolorum accusamus dicta? Perspiciatis officiis, reprehenderit dolorem sequi eligendi alias iusto velit quo ullam blanditiis ab fuga labore magnam. Magni non consequuntur adipisci, id assumenda dolorem sint aliquam obcaecati ipsum modi quam, cupiditate eos pariatur expedita. Sint temporibus, expedita possimus obcaecati vitae cum labore minus unde totam tenetur quos eveniet architecto reprehenderit iure iste exercitationem reiciendis incidunt repellat omnis modi delectus neque amet. Ullam impedit alias, labore doloribus corrupti facilis saepe earum amet? Facere nostrum ab voluptatum dicta dolor sunt, at quo laboriosam velit quis, optio, rerum recusandae magni repellendus. Assumenda quod, nulla veritatis voluptatum distinctio animi similique aspernatur deserunt, adipisci id iure perferendis ipsum ut soluta. Ullam repellendus voluptatem quod maxime minus? Laborum amet id maiores accusantium sapiente necessitatibus tempora rerum cupiditate, exercitationem nobis minus sequi quas laboriosam autem doloremque, non facilis repellat eligendi et. Iusto ipsam molestiae non sint, aut porro, perspiciatis modi iste beatae, velit neque perferendis! Soluta odio distinctio nesciunt unde fugit, cum eaque! Vero assumenda itaque perferendis deleniti exercitationem, distinctio quibusdam laudantium quo aliquid natus modi ipsum repudiandae consequuntur temporibus. Est nemo qui consequatur.";
 	onMount(() => {
 		dragdrop = document.querySelector(".dragdrop");
 		dragdrop.addEventListener("dragover", (e) => {
@@ -85,26 +89,43 @@
 		<h1 class="bantext">ONLINE OCR</h1>
 		<h2 class="bantext2">Extract text from images easily and accurately</h2>
 	</div>
-	<div class="fileupload-wrapper">
-		<div class="fileupload">
-			<div
-				class={!uploadStatus
-					? "dragdrop"
-					: uploadStatus === "success"
-					? "dragdrop uploadSuccess"
-					: "dragdrop uploadFailed"}
-			>
-				<p style="font-size: 2.5em; color: #D2D2D2">
-					Drag Your Image Here, or <span class="selectFile"
-						>Browse</span
+	{#if isImageConverted == true}
+		<div class="convert-text-wrapper">
+			<div class="converted-text-div">
+				<h1 class="converted-message">
+					Hurray!! Your Image Is Been Processed
+				</h1>
+				<div class="converted-text-selection">
+					<p class="converted-text">{convertedText}</p>
+				</div>
+				<div class="coverted-options">
+					<button class="button-converted" id="copy"
+						>Copy To Clipboard</button
 					>
-				</p>
-				<input type="file" id="fileInput" accept="image/*" />
-
-				<img src="" alt="" />
-				<!-- add image -->
+					<button class="button-converted" id="reload"
+						>Convert Again</button
+					>
+				</div>
 			</div>
-			<!-- <div class="uploadBtns">
+		</div>
+	{:else}
+		<div class="fileupload-wrapper">
+			<div class="fileupload">
+				<div
+					class={!uploadStatus
+						? "dragdrop"
+						: uploadStatus === "success"
+						? "dragdrop uploadSuccess"
+						: "dragdrop uploadFailed"}
+				>
+					<p style="font-size: 2.5em; color: #D2D2D2">
+						Drag Your Image Here, or <span class="selectFile"
+							>Browse</span
+						>
+					</p>
+					<input type="file" id="fileInput" accept="image/*" />
+				</div>
+				<!-- <div class="uploadBtns">
 				<button id="upload" class="btn"
 					><img src="/images/Vector.png" alt="" /></button
 				>
@@ -115,13 +136,16 @@
 					><img src="/images/camera2.png" alt="" /></button
 				>
 			</div> -->
-			<div
-				class={uploadStatus === "success" ? "convertBtn" : "nodisplay"}
-			>
-				<button id="convert">Convert</button>
+				<div
+					class={uploadStatus === "success"
+						? "convertBtn"
+						: "nodisplay"}
+				>
+					<button id="convert">Convert</button>
+				</div>
 			</div>
 		</div>
-	</div>
+	{/if}
 </div>
 
 <style>
@@ -131,13 +155,15 @@
 		align-items: center;
 	}
 
-	.fileupload-wrapper {
+	.fileupload-wrapper,
+	.convert-text-wrapper {
 		width: 50%;
 		display: flex;
 		align-items: center;
 		justify-content: center;
 	}
-	.fileupload {
+	.fileupload,
+	.converted-text-div {
 		width: 80%;
 		height: auto;
 		background: rgba(191, 184, 250, 0.15);
@@ -167,7 +193,8 @@
 		font-weight: 500;
 		font-style: italic;
 	}
-	.dragdrop {
+	.dragdrop,
+	.converted-text-selection {
 		width: 90%;
 		height: 50vh;
 		border-radius: 1rem;
@@ -176,6 +203,37 @@
 		justify-content: center;
 		align-items: center;
 		cursor: pointer;
+	}
+
+	.converted-text-selection {
+		cursor: default;
+		border: none;
+		overflow-y: scroll;
+		background-color: #221d4954;
+		border: solid 1px #fff;
+	}
+
+	.converted-text-selection p {
+		color: #fff;
+		font-size: 1.7rem;
+		font-weight: 400;
+		text-align: left;
+		height: 100%;
+		width: 100%;
+		padding: 2rem;
+	}
+
+	.converted-message {
+		color: #fff;
+		font-size: 1.5rem;
+		font-weight: 400;
+		word-spacing: 0.25rem;
+		letter-spacing: 0.05rem;
+		padding: 1rem 0;
+	}
+
+	.converted-text-selection::-webkit-scrollbar {
+		display: none;
 	}
 
 	.uploadSuccess {
@@ -225,7 +283,8 @@
 		width: 100%;
 		margin-top: 2rem;
 	}
-	#convert {
+	#convert,
+	.button-converted {
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -237,6 +296,21 @@
 		font-size: 2em;
 		margin: 10px;
 		cursor: pointer;
+	}
+
+	.coverted-options {
+		display: flex;
+		gap: 1rem;
+		flex-direction: row;
+		align-items: center;
+		justify-content: center;
+		width: 70%;
+		padding: 1rem 0;
+	}
+
+	.coverted-options button {
+		font-size: 1.4rem;
+		width: 50% !important;
 	}
 	.btn img {
 		width: 40px;
