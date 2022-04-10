@@ -80,53 +80,91 @@
 	};
 </script>
 
-<div class="fileupload">
-	<div
-		class={!uploadStatus
-			? "dragdrop"
-			: uploadStatus === "success"
-			? "dragdrop uploadSuccess"
-			: "dragdrop uploadFailed"}
-	>
-		<p style="font-size: 2.5em; color: #D2D2D2">
-			Drag Your Image Here, or <span class="selectFile">Browse</span>
-		</p>
-		<input type="file" id="fileInput" accept="image/*" />
+<div class="div-wrapper">
+	<div class="about-text">
+		<h1 class="bantext">ONLINE OCR</h1>
+		<h2 class="bantext2">Extract text from images easily and accurately</h2>
+	</div>
+	<div class="fileupload-wrapper">
+		<div class="fileupload">
+			<div
+				class={!uploadStatus
+					? "dragdrop"
+					: uploadStatus === "success"
+					? "dragdrop uploadSuccess"
+					: "dragdrop uploadFailed"}
+			>
+				<p style="font-size: 2.5em; color: #D2D2D2">
+					Drag Your Image Here, or <span class="selectFile"
+						>Browse</span
+					>
+				</p>
+				<input type="file" id="fileInput" accept="image/*" />
 
-		<img src="" alt="" />
-		<!-- add image -->
-	</div>
-	<div class="uploadBtns">
-		<button id="upload" class="btn"
-			><img src="/images/Vector.png" alt="" /></button
-		>
-		<button id="link" class="btn"
-			><img src="/images/link2.png" alt="" /></button
-		>
-		<button id="camera" class="btn"
-			><img src="/images/camera2.png" alt="" /></button
-		>
-	</div>
-	<div class={uploadStatus === "success" ? "convertBtn" : "nodisplay"}>
-		<button id="convert">Convert</button>
+				<img src="" alt="" />
+				<!-- add image -->
+			</div>
+			<div class="uploadBtns">
+				<button id="upload" class="btn"
+					><img src="/images/Vector.png" alt="" /></button
+				>
+				<button id="link" class="btn"
+					><img src="/images/link2.png" alt="" /></button
+				>
+				<button id="camera" class="btn"
+					><img src="/images/camera2.png" alt="" /></button
+				>
+			</div>
+			<div
+				class={uploadStatus === "success" ? "convertBtn" : "nodisplay"}
+			>
+				<button id="convert">Convert</button>
+			</div>
+		</div>
 	</div>
 </div>
 
 <style>
+	.div-wrapper {
+		display: flex;
+		height: 90vh;
+		align-items: center;
+	}
+
+	.fileupload-wrapper {
+		width: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
 	.fileupload {
-		position: absolute;
-		right: 4em;
-		top: 20%;
-		width: 35%;
-		min-width: 250px;
+		width: 80%;
 		height: auto;
 		background: rgba(191, 184, 250, 0.15);
 		border-radius: 10px;
-		margin: 4em;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		row-gap: 5%;
+	}
+
+	.about-text {
+		width: 50%;
+		padding: 1rem;
+		color: white;
+		display: grid;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.about-text h1 {
+		font-size: 3.5rem;
+	}
+
+	.about-text h2 {
+		font-size: 2rem;
+		font-weight: 500;
+		font-style: italic;
 	}
 	.dragdrop {
 		width: 90%;

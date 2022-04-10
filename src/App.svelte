@@ -1,12 +1,10 @@
 <script>
 	import Navbar from "./Components/Navbar.svelte";
 	import Upload from "./Components/Upload.svelte";
-	import Banner from "./Components/Banner.svelte";
 </script>
 
 <main>
 	<Navbar />
-	<Banner />
 	<Upload />
 </main>
 
