@@ -61,7 +61,7 @@
 		height: 100%;
 	}
 	#logo {
-		background: -webkit-linear-gradient(#eee, #333);
+		background: -webkit-linear-gradient(#0088ff, rgb(57, 255, 159));
 		background-clip: text;
 		-webkit-background-clip: text;
 		-webkit-text-fill-color: transparent;
@@ -106,7 +106,7 @@
 
 	.tooltiptext {
 		display: none;
-		color: #fff;
+		color: #221d49;
 		background: #04bccd;
 		position: absolute;
 		width: 20em;
@@ -115,8 +115,7 @@
 		text-align: center;
 		padding: 5px 0;
 		border-radius: 6px;
-		padding: 1rem;
-		text-align: left;
+		padding: 10px;
 	}
 	#tip2 {
 		right: 8rem;
