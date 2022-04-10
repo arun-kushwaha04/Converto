@@ -4,6 +4,7 @@
 	let base64String;
 	let maxAllowedSize = 20 * 1024 * 1024;
 	let uploadStatus;
+	var imageTypes = ["image/png", "image/bmp", "image/jpeg"];
 	onMount(() => {
 		dragdrop = document.querySelector(".dragdrop");
 		dragdrop.addEventListener("dragover", (e) => {
@@ -20,13 +21,10 @@
 
 			const image = e.dataTransfer.files[0];
 			const type = image.type;
+			console.log(type);
 
 			if (image.size <= maxAllowedSize) {
-				if (
-					type == "image/jpg" ||
-					type == "iimage/png" ||
-					type == "mage/jpeg"
-				) {
+				if (imageTypes.includes(type)) {
 					upload(image);
 				} else {
 					console.log("Invalid file format");
@@ -109,7 +107,7 @@
 			><img src="/images/camera2.png" alt="" /></button
 		>
 	</div>
-	<div class="convertBtn">
+	<div class={uploadStatus === "success" ? "convertBtn" : "nodisplay"}>
 		<button id="convert">Convert</button>
 	</div>
 </div>
@@ -121,7 +119,7 @@
 		top: 20%;
 		width: 35%;
 		min-width: 250px;
-		height: 70%;
+		height: auto;
 		background: rgba(191, 184, 250, 0.15);
 		border-radius: 10px;
 		margin: 4em;
@@ -132,9 +130,9 @@
 	}
 	.dragdrop {
 		width: 90%;
-		height: 60%;
-		margin-top: 20px;
-		border-radius: 10px;
+		height: 50vh;
+		margin-top: 2rem;
+		border-radius: 1rem;
 		border: 2px dashed #fff;
 		display: flex;
 		justify-content: center;
@@ -156,6 +154,10 @@
 
 	.uploadFailed p {
 		color: red !important;
+	}
+
+	.nodisplay {
+		display: none;
 	}
 
 	#fileInput {
@@ -193,8 +195,6 @@
 		border: none;
 		color: #fff;
 		border-radius: 10px;
-		/* padding: 10px 0px; */
-		/* padding: 10% 70% 10% 70%; */
 		font-size: 2em;
 		margin: 10px;
 		cursor: pointer;
