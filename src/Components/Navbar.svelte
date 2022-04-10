@@ -1,13 +1,18 @@
 <header>
 	<div class="img-div">
 		<img
-			src="https://upload.wikimedia.org/wikipedia/en/3/3b/Canva_Logo.png" alt=""
+			src="https://upload.wikimedia.org/wikipedia/en/3/3b/Canva_Logo.png"
+			alt=""
 		/>
 	</div>
 	<div class="link-div">
 		<div class="link hover-underline-animation">How to Use</div>
-		<div class="link hover-underline-animation">Contribute</div>
-		<div class="link hover-underline-animation">About Us</div>
+		<div class="link hover-underline-animation">
+			<a href="https://github.com/anshrusia200/Converto" target="_blank"
+				>Contribute</a
+			>
+		</div>
+		<!-- <div class="link hover-underline-animation">About Us</div> -->
 	</div>
 </header>
 
@@ -17,11 +22,16 @@
 		height: 10vh;
 		background-color: transparent;
 		display: flex;
-  justify-content:space-between;
+		justify-content: space-between;
+	}
+
+	a {
+		text-decoration: none;
+		color: white;
 	}
 	.img-div {
 		height: 100%;
-  width:20%;
+		width: 20%;
 	}
 
 	.img-div img {
@@ -29,7 +39,7 @@
 		height: 100%;
 	}
 	.link-div {
-		width:30%;
+		width: 30%;
 		/* border: 2px solid red; */
 		display: flex;
 		align-items: center;
@@ -70,14 +80,14 @@
 		.link {
 			font-size: 2rem;
 		}
-  header{
-   padding:1rem;
-  }
-  .img-div{
-   width:30%;
-  }
+		header {
+			padding: 1rem;
+		}
+		.img-div {
+			width: 30%;
+		}
 		.link-div {
-			width:60%;
+			width: 60%;
 		}
 	}
 </style>

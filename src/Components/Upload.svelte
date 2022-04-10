@@ -282,19 +282,6 @@
 		color: steelblue;
 	}
 
-	.uploadBtns {
-		/* margin: 20px; */
-		width: 100%;
-	}
-	.btn {
-		background-color: transparent;
-		border: none;
-		cursor: pointer;
-		margin: 0px 20px 0px 20px;
-	}
-	.btn:active {
-		background-color: transparent;
-	}
 	.convertBtn {
 		display: flex;
 		justify-content: center;
@@ -329,8 +316,5 @@
 	.coverted-options button {
 		font-size: 1.4rem;
 		width: 50% !important;
-	}
-	.btn img {
-		width: 40px;
 	}
 </style>
